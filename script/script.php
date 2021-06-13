@@ -17,7 +17,7 @@ if($result = $conn->query($queryAnimal)){
     while($row = $result->fetch_array()){
         $linha = array();
         foreach($colunasAnimal as $field){
-            array_push($linha, $row[$field]);
+            array_push($linha, $row[$field]?? "");
         }
         fputcsv($arquivoAnimal, $linha);
     }
