@@ -13,18 +13,25 @@
           <input type="file" id="clientes" ref="clientes" v-on:change="handleFileUploadClientes()"/>
         </label>
       </div>
+      <div class="upload-button">
+      <p v-if="this.isLoading">Carregando...</p>
       <button v-on:click="submitFiles()">Carregar</button>
+      </div>
   </div>
 </template>
 <script>
-import axios from 'axios';
+import api from '../services/api';
 
 export default {
   name: 'UploadFile',
+  props: {
+    updateFunction: Function,
+  },
   data() {
     return {
       animais: '',
       clientes: '',
+      isLoading: false,
     };
   },
   methods: {
@@ -40,17 +47,19 @@ export default {
       const formData = new FormData();
       formData.append('animais', this.animais);
       formData.append('clientes', this.clientes);
-      axios.post('/single-file',
+      this.isLoading = true;
+      api.post('http://172.24.148.212:8000/upload',
         formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         }).then(() => {
-        console.log('SUCCESS!!');
+        this.updateFunction();
+        this.isLoading = false;
       })
         .catch(() => {
-          console.log('FAILURE!!');
+          this.isLoading = false;
         });
     },
   },
@@ -91,11 +100,15 @@ export default {
     background-color: #44bccb;
     color:#fff;
     text-transform:uppercase;
-    margin:20px 0px;
+    margin:0px;
     height:40px;
     box-shadow: 0 0 0 #fff;
     border: 0 solid #fff;
     border-radius: 3px;
     width:100%;
+}
+
+.upload-button{
+  margin:20px 0px;
 }
 </style>

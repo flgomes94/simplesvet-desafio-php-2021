@@ -1,36 +1,17 @@
 <template>
   <img src="./assets/logo.svg" style="width: 50%;">
-  <Upload/>
-  <Table titulo='Raças' :colunas="colunasRacas" :elementos="elementosRacas" />
-  <Table titulo='Espécies' :colunas="colunasRacas" :elementos="elementosRacas"/>
-  <Table titulo='Animais' :colunas="colunasRacas" :elementos="elementosRacas"/>
-  <Table titulo='Pessoas' :colunas="colunasRacas" :elementos="elementosRacas"/>
-  <Table titulo='Contatos' :colunas="colunasRacas" :elementos="elementosRacas"/>
+  <Upload :updateFunction="getData"/>
+  <Table titulo='Pessoas' :colunas="colunasPessoas" :elementos="elementosPessoas" />
+  <Table titulo='Contatos' :colunas="colunasContatos" :elementos="elementosContatos"/>
+  <Table titulo='Espécies' :colunas="colunasEspecies" :elementos="elementosEspecies"/>
+  <Table titulo='Raças' :colunas="colunasRacas" :elementos="elementosRacas"/>
+  <Table titulo='Animais' :colunas="colunasAnimais" :elementos="elementosAnimais"/>
 </template>
 
 <script>
 import Upload from './components/Upload.vue';
 import Table from './components/Table.vue';
-
-const colunasRacas = ['id', 'especie_id', 'nome'];
-const elementosRacas = [
-  {
-    id: 1,
-    especie_id: 1,
-    nome: 'canina',
-  },
-  {
-    id: 2,
-    especie_id: 1,
-    nome: 'felina',
-  },
-  {
-    id: 3,
-    especie_id: 1,
-    nome: 'canina',
-  },
-
-];
+import api from './services/api';
 
 export default {
   name: 'App',
@@ -40,9 +21,60 @@ export default {
   },
   data() {
     return {
-      colunasRacas,
-      elementosRacas,
+      colunasPessoas: [],
+      elementosPessoas: [],
+      colunasContatos: [],
+      elementosContatos: [],
+      colunasEspecies: [],
+      elementosEspecies: [],
+      colunasRacas: [],
+      elementosRacas: [],
+      colunasAnimais: [],
+      elementosAnimais: [],
     };
+  },
+  methods: {
+    /* eslint-disable */
+      getData() {
+        /* eslint-disable */
+    api
+      .get('/pessoas')
+      .then((response) => {this.colunasPessoas = response.data.headers;
+        this.elementosPessoas = response.data.data;
+        }
+      );
+      /* eslint-disable */
+    api
+      .get('/contatos')
+      .then((response) => {this.colunasContatos = response.data.headers;
+        this.elementosContatos = response.data.data;
+        }
+      );
+        /* eslint-disable */
+    api
+      .get('/especies')
+      .then((response) => {this.colunasEspecies = response.data.headers;
+        this.elementosEspecies = response.data.data;
+        }
+      );
+       /* eslint-disable */
+    api
+      .get('/racas')
+      .then((response) => {this.colunasRacas = response.data.headers;
+        this.elementosRacas = response.data.data;
+        }
+      );
+         /* eslint-disable */
+    api
+      .get('/animais')
+      .then((response) => {this.colunasAnimais = response.data.headers;
+        this.elementosAnimais = response.data.data;
+        }
+      );
+    }
+  },
+  mounted() {
+    this.getData();
   },
 };
 </script>
