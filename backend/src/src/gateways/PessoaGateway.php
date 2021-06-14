@@ -64,7 +64,8 @@ class PessoaGateway {
             $statement = $this->db->prepare($statement);
             $statement->execute(array($pessoa_id));
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            return $result[0];
+            print_r($result[0]);
+            return $result[0]??null;
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
