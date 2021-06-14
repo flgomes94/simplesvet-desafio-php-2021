@@ -31,15 +31,12 @@ export default {
     handleFileUploadAnimais() {
       // eslint-disable-next-line prefer-destructuring
       this.animais = this.$refs.animais.files[0]; // o segundo é um tamanho
-      console.log(this.animais);
     },
     handleFileUploadClientes() {
       // eslint-disable-next-line prefer-destructuring
       this.clientes = this.$refs.clientes.files[0]; // o segundo é um tamanho
-      console.log(this.clientes);
     },
     submitFiles() {
-      console.log(this.animais, this.clientes);
       const formData = new FormData();
       formData.append('animais', this.animais);
       formData.append('clientes', this.clientes);
