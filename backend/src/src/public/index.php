@@ -1,6 +1,11 @@
 <?php
 require "../../bootstrap.php";
 
+use Src\controllers\AnimalController;
+use Src\controllers\ContatoController;
+use Src\controllers\EspecieController;
+use Src\controllers\PessoaController;
+use Src\controllers\RacaController;
 use Src\gateways\AnimalGateway;
 use Src\gateways\ContatoGateway;
 use Src\gateways\EspecieGateway;
@@ -66,6 +71,34 @@ if($uri[1] == 'upload'){
         fclose($h);
     }
 }
+if($uri[1] == 'pessoas')
+{
+    $pessoaController = new PessoaController($dbConnection, $requestMethod);
+    return $pessoaController->processRequest();
+} 
+else if($uri[1] == 'contatos')
+{
+    $contatoController = new ContatoController($dbConnection, $requestMethod);
+    return $contatoController->processRequest();
+}
+else if($uri[1] == 'especies')
+{
+    $especieController = new EspecieController($dbConnection, $requestMethod);
+    return $especieController->processRequest();
+}
+
+else if($uri[1] == 'racas')
+{
+    $racaController = new RacaController($dbConnection, $requestMethod);
+    return $racaController->processRequest();
+}
+
+else if($uri[1] == 'animais')
+{
+    $animalController = new AnimalController($dbConnection, $requestMethod);
+    return $animalController->processRequest();
+}
+
 else{
     header("HTTP/1.1 404 Not Found");
     exit();
