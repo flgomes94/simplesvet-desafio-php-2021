@@ -11,6 +11,7 @@ use Src\gateways\ContatoGateway;
 use Src\gateways\EspecieGateway;
 use Src\gateways\PessoaGateway;
 use Src\gateways\RacaGateway;
+use Src\helpers\Validators;
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -37,9 +38,22 @@ if($uri[1] == 'upload'){
             $gatewayPessoa = new PessoaGateway($dbConnection);
             $pessoaInserida = $gatewayPessoa->insert(array("id"=>$id,"nome"=>$nome));
             $gatewayContato = new ContatoGateway($dbConnection);
-            $gatewayContato->insert(array("pessoa_id" => $pessoaInserida['id'], "tipo" =>"fixo","contato"=>$telefone1));
-            $gatewayContato->insert(array("pessoa_id" => $pessoaInserida['id'], "tipo" =>"fixo","contato"=>$telefone2));
-            $gatewayContato->insert(array("pessoa_id" => $pessoaInserida['id'], "tipo" =>"email","contato"=>$email));
+            $validators = new Validators();
+            if($telefone1){
+                $telefone_formatado_1 = $validators->telefone($telefone1);
+                if($telefone_formatado_1["valid"]){
+                    $gatewayContato->insert(array("pessoa_id" => $pessoaInserida['id'], "tipo" =>$telefone_formatado_1["tipo"],"contato"=>$telefone_formatado_1["telefone"]));
+                }
+            }
+            if($telefone2){
+                $telefone_formatado_2 = $validators->telefone($telefone2);
+                if($telefone_formatado_2["valid"]){
+                    $gatewayContato->insert(array("pessoa_id" => $pessoaInserida['id'], "tipo" =>$telefone_formatado_2["tipo"],"contato"=>$telefone_formatado_2["telefone"]));
+                }
+            }
+            if($validators->email($email)){
+                $gatewayContato->insert(array("pessoa_id" => $pessoaInserida['id'], "tipo" =>"email","contato"=>$email));
+            }
         }
         fclose($h);
     }
