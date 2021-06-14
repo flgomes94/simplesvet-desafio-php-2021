@@ -3,13 +3,13 @@
       <h1>Upload de Arquivos</h1>
       <div>
         <p>{{animais.name  || ""}}</p>
-        <label>Arquivos Animais
+        <label>Selecionar Arquivos Animais
           <input type="file" id="animais" ref="animais" v-on:change="handleFileUploadAnimais()"/>
         </label>
       </div>
       <div>
       <p>{{clientes.name || ""}}</p>
-        <label>Arquivos Clientes
+        <label>Selecionar Arquivos Clientes
           <input type="file" id="clientes" ref="clientes" v-on:change="handleFileUploadClientes()"/>
         </label>
       </div>
