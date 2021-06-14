@@ -7,19 +7,17 @@ class ContatoController {
     private $requestMethod;
     private $contatoGateway;
 
-    public function __construct($db, $requestMethod,$dados)
+    public function __construct($db, $requestMethod)
     {
         $this->requestMethod = $requestMethod;
-        $this->dados = $dados;
-        
         $this->contatoGateway = new ContatoGateway($db);
     }
 
     public function processRequest()
     {
         switch ($this->requestMethod) {
-            case 'POST':
-                $response = $this->criarContatoRequest();
+            case 'GET':
+                $response = $this->getAllContatos();
                 break;
             default:
                 $response = $this->notFoundResponse();
@@ -31,11 +29,11 @@ class ContatoController {
         }
     }
 
-    private function criarContatoRequest()
+    private function getAllContatos()
     {
-        $this->contatoGateway->insert($this->dados);
-        $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        $response['body'] = null;
+        $result = $this->contatoGateway->findAll();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
         return $response;
     }
 

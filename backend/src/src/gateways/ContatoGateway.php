@@ -10,6 +10,24 @@ class ContatoGateway {
         $this->db = $db;
     }
 
+    public function findAll()
+    {
+        $statement = "
+            SELECT 
+                id, pessoa_id,tipo,contato
+            FROM
+                contatos;
+        ";
+
+        try {
+            $statement = $this->db->query($statement);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            return array("data" => $result, "headers" => array("id","pessoa_id", "tipo", "contato"));
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
     public function insert(Array $entrada)
     {
         $statement = "
