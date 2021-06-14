@@ -1,6 +1,6 @@
 <template>
     <h1 class="table-title">{{titulo}}</h1>
-    <table class="table-content">
+    <table class="table-content" v-if="elementos.length > 0">
     <tr>
         <th v-for="(coluna,key) in colunas" :key="key">{{coluna}}</th>
     </tr>
@@ -9,6 +9,7 @@
     </tr>
 
     </table>
+    <p v-if="elementos.length == 0">Sem dados para exibir</p>
 </template>
 <script>
 export default {
