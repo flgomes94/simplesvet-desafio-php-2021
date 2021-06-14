@@ -22,7 +22,7 @@ class PessoaGateway {
         try {
             $statement = $this->db->query($statement);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            return $result;
+            return array("data" => $result, "headers" => array("id","nome"));
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }

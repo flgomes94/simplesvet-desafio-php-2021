@@ -6,13 +6,11 @@ use Src\gateways\PessoaGateway;
 class PessoaController {
     private $requestMethod;
     private $pessoaGateway;
-    private $data;
 
 
-    public function __construct($db, $requestMethod, $data=null)
+    public function __construct($db, $requestMethod)
     {
         $this->requestMethod = $requestMethod;
-        $this->data = $data;
         $this->pessoaGateway = new PessoaGateway($db);
     }
 
@@ -20,10 +18,8 @@ class PessoaController {
     {
         switch ($this->requestMethod) {
             case 'GET':
-                $response = $this->getAllUsers();
+                $response = $this->getAllPessoas();
                 break;
-            case 'POST':
-                $response = $this->createUser();
             default:
                 $response = $this->notFoundResponse();
                 break;
@@ -34,7 +30,7 @@ class PessoaController {
         }
     }
 
-    private function getAllUsers()
+    private function getAllPessoas()
     {
         $result = $this->pessoaGateway->findAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
