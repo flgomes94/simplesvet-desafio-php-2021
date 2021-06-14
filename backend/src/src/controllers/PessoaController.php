@@ -38,14 +38,6 @@ class PessoaController {
         return $response;
     }
 
-    private function createUser()
-    {
-        $result = $this->pessoaGateway->findAll();
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-
     private function notFoundResponse()
     {
         $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
