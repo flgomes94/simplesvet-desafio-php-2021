@@ -17,7 +17,7 @@ class ContatoController {
     {
         switch ($this->requestMethod) {
             case 'GET':
-                $response = $this->getAllContatos();
+                $response = $this->getAll();
                 break;
             default:
                 $response = $this->notFoundResponse();
@@ -29,7 +29,7 @@ class ContatoController {
         }
     }
 
-    private function getAllContatos()
+    private function getAll()
     {
         $result = $this->contatoGateway->findAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';

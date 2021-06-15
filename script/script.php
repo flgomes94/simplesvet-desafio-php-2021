@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 $queryAnimal =  "SELECT * from Animal";
 $arquivoAnimal = fopen('Animal.csv', 'w');
-
+// ESCREVENDO ARQUIVO ANIMAL.CSV
 fputcsv($arquivoAnimal, $colunasAnimal);
 if ($result = $conn->query($queryAnimal)) {
     while ($row = $result->fetch_array()) {
@@ -28,7 +28,7 @@ fclose($arquivoAnimal);
 
 $queryCliente =  "SELECT * from Cliente";
 $arquivoCliente = fopen('Cliente.csv', 'w');
-
+// ESCREVENDO ARQUIVO CLIENTES.CSV
 fputcsv($arquivoCliente, $colunasCliente);
 if ($result = $conn->query($queryCliente)) {
     while ($row = $result->fetch_array()) {

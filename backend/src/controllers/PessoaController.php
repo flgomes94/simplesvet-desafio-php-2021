@@ -18,7 +18,7 @@ class PessoaController {
     {
         switch ($this->requestMethod) {
             case 'GET':
-                $response = $this->getAllPessoas();
+                $response = $this->getAll();
                 break;
             default:
                 $response = $this->notFoundResponse();
@@ -30,7 +30,7 @@ class PessoaController {
         }
     }
 
-    private function getAllPessoas()
+    private function getAll()
     {
         $result = $this->pessoaGateway->findAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
