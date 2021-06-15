@@ -48,7 +48,7 @@ export default {
       formData.append('animais', this.animais);
       formData.append('clientes', this.clientes);
       this.isLoading = true;
-      api.post('http://172.24.148.212:8000/upload',
+      api.post('/upload',
         formData,
         {
           headers: {
