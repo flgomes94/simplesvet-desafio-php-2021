@@ -10,7 +10,7 @@ services:
         ports:
             - "3306:3306"
         volumes:
-            - ./complicadovet:/docker-entrypoint-initdb.d
+            - ./db:/docker-entrypoint-initdb.d
         networks:
             - mysql-network
 
