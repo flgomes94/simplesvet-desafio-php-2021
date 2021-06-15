@@ -34,44 +34,39 @@ export default {
     };
   },
   methods: {
-    /* eslint-disable */
-      getData() {
-        /* eslint-disable */
-    api
-      .get('/pessoas')
-      .then((response) => {this.colunasPessoas = response.data.headers;
-        this.elementosPessoas = response.data.data;
-        }
-      );
-      /* eslint-disable */
-    api
-      .get('/contatos')
-      .then((response) => {this.colunasContatos = response.data.headers;
-        this.elementosContatos = response.data.data;
-        }
-      );
-        /* eslint-disable */
-    api
-      .get('/especies')
-      .then((response) => {this.colunasEspecies = response.data.headers;
-        this.elementosEspecies = response.data.data;
-        }
-      );
-       /* eslint-disable */
-    api
-      .get('/racas')
-      .then((response) => {this.colunasRacas = response.data.headers;
-        this.elementosRacas = response.data.data;
-        }
-      );
-         /* eslint-disable */
-    api
-      .get('/animais')
-      .then((response) => {this.colunasAnimais = response.data.headers;
-        this.elementosAnimais = response.data.data;
-        }
-      );
-    }
+    getData() {
+      api
+        .get('/pessoas')
+        .then((response) => {
+          this.colunasPessoas = response.data.headers;
+          this.elementosPessoas = response.data.data;
+        });
+      api
+        .get('/contatos')
+        .then((response) => {
+          this.colunasContatos = response.data.headers;
+          this.elementosContatos = response.data.data;
+        });
+      api
+        .get('/especies')
+        .then((response) => {
+          this.colunasEspecies = response.data.headers;
+          this.elementosEspecies = response.data.data;
+        });
+      api
+        .get('/racas')
+        .then((response) => {
+          this.colunasRacas = response.data.headers;
+          this.elementosRacas = response.data.data;
+        });
+
+      api
+        .get('/animais')
+        .then((response) => {
+          this.colunasAnimais = response.data.headers;
+          this.elementosAnimais = response.data.data;
+        });
+    },
   },
   mounted() {
     this.getData();
