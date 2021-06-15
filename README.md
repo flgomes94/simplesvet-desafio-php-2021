@@ -15,6 +15,7 @@ O projeto é composto pelos módullos:
 - para o script, utilizado tecnologia php, com mysqli;
 - Para o frontend, utilizado Vue.JS, HTML, CSS, Javascript;
 - para o backend, utilizado composer e HTML;
+- ATENÇÃO: AO IMPORTAR UMA BASE DE DADOS COM ELEMENTOS REPETIDOS, OU COM IDS JÁ INSERIDOS NO BANCO DE DADOS, OS INSERTS COM ID JÁ INSERIDOS NÃO SERÃO CADASTRADOS NO BANCO
 
 ## Instalação
 
